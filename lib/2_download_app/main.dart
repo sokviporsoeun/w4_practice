@@ -22,6 +22,17 @@ class _MyAppState extends State<MyApp> {
   final List<Widget> _pages =  [DownloadsScreen(), SettingsScreen()];
 
   @override
+  void initState(){
+    super.initState();
+    themeColorProvider.addListener((){
+      setState(() {
+        
+      });
+    }
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -36,7 +47,7 @@ class _MyAppState extends State<MyApp> {
               _currentIndex = index;
             });
           },
-          selectedItemColor: currentThemeColor.color,
+          selectedItemColor: themeColorProvider.currentThemeColor.color,
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Downloads'),
             BottomNavigationBarItem(
