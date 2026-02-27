@@ -3,6 +3,7 @@ import '../../providers/theme_color_provider.dart';
 import '../../theme/theme.dart';
 import 'widgets/download_controler.dart';
 import 'package:flutter/cupertino.dart';
+import '../downloads/widgets/download_tile.dart';
 
 
 class DownloadsScreen extends StatelessWidget {
@@ -30,6 +31,7 @@ class DownloadsScreen extends StatelessWidget {
         final currentThemeColor = themeColorProvider.currentThemeColor;
         return Container(
           color: currentThemeColor.backgroundColor,
+          width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -37,6 +39,17 @@ class DownloadsScreen extends StatelessWidget {
               Text("Downloads",style: AppTextStyles.heading.copyWith(color:currentThemeColor.color),),
               SizedBox(height: 50),
               // TODO - Add the Download tiles
+              Expanded(
+                  
+                  child: ListView.builder(
+                    itemCount: controllers.length,
+                    itemBuilder: (context, index ) => 
+                    ListenableBuilder(
+                      listenable: DownloadController(ressources[index]),
+                      builder: (context, child) => DownloadTile(controller: controllers[index]))
+                    ),
+                
+                )
             ],
           ),
         );
